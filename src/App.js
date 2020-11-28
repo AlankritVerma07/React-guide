@@ -11,7 +11,9 @@ const app = (props) => {
     ],
     otherState: "Some other value",
   });
-  console.log(personsState);
+
+  const [otherState, setOtherState] = useState({ otherState: personsState.otherState }); //more elegant way to merge states using hooks
+  console.log(personsState, otherState);
   const switchNameHandler = () => {
     setPersonsSState({
       persons: [
@@ -19,7 +21,7 @@ const app = (props) => {
         { name: "James", age: 32 },
         { name: "Joe", age: 42 },
       ],
-      otherState: personsState.otherState, //since useSate() replaces the older state and does not merges it
+      //otherState: personsState.otherState, //since useSate() replaces the older state and does not merges it
     });
   };
   return (
