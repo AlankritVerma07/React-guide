@@ -14,10 +14,10 @@ const app = (props) => {
 
   const [otherState, setOtherState] = useState({ otherState: personsState.otherState }); //more elegant way to merge states using hooks
   console.log(personsState, otherState);
-  const switchNameHandler = () => {
+  const switchNameHandler = (newName) => {
     setPersonsSState({
       persons: [
-        { name: "Sam", age: 29 },
+        { name: newName, age: 29 },
         { name: "James", age: 32 },
         { name: "Joe", age: 42 },
       ],
@@ -27,8 +27,12 @@ const app = (props) => {
   return (
     <div className="App">
       <h1>I'am React App!</h1>
-      <button onClick={switchNameHandler}>Switch Name</button>
-      <Person name={personsState.persons[0].name} age={personsState.persons[0].age}>
+      <button onClick={() => switchNameHandler("Alan_v!!")}>Switch Name</button>
+      <Person
+        name={personsState.persons[0].name}
+        age={personsState.persons[0].age}
+        click={switchNameHandler.bind(this, "Mavrick")}
+      >
         Hobbies:Playien
       </Person>
       <Person name={personsState.persons[1].name} age={personsState.persons[1].age} />
