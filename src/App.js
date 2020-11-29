@@ -34,10 +34,19 @@ const app = (props) => {
       //otherState: personsState.otherState, //since useSate() replaces the older state and does not merges it
     });
   };
+  const style = {
+    backgroundColor: "white",
+    font: "inherit",
+    border: "1px solid blue",
+    padding: "8px",
+    cursor: "pointer",
+  };
   return (
     <div className="App">
       <h1>I'am React App!</h1>
-      <button onClick={() => switchNameHandler("Alan_v!!")}>Switch Name</button>
+      <button style={style} onClick={() => switchNameHandler("Alan_v!!")}>
+        Switch Name
+      </button>
       <Person
         name={personsState.persons[0].name}
         age={personsState.persons[0].age}
