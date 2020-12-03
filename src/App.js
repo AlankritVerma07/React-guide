@@ -23,6 +23,17 @@ const app = (props) => {
     });
   };
 
+  const deletePersonHandler = (personIndex) => {
+    console.log(personIndex);
+    const persons = personsState.persons;
+    persons.splice(personIndex, 1);
+    setDelState({
+      persons: persons,
+      otherState: "Some other value",
+      showPersons: false,
+    });
+  };
+
   const togglePersonhandler = (event) => {
     const doesShow = personsState.showPersons;
     setPersonsState({
@@ -36,17 +47,16 @@ const app = (props) => {
     });
   };
   const [otherState, setOtherState] = useState({ otherState: personsState.otherState }); //more elegant way to merge states using hooks
-  console.log(personsState, otherState);
-  const switchNameHandler = (newName) => {
-    setPersonsState({
-      persons: [
-        { name: newName, age: 29 },
-        { name: "James", age: 32 },
-        { name: "Joe", age: 42 },
-      ],
-      //otherState: personsState.otherState, //since useSate() replaces the older state and does not merges it
-    });
-  };
+  const [delState, setDelState] = useState({
+    persons: [
+      { name: "Mike", age: 22 },
+      { name: "Michal", age: 24 },
+      { name: "Tom", age: 23 },
+    ],
+    otherState: "Some other value",
+    showPersons: false,
+  });
+  console.log(personsState, otherState, delState);
   const style = {
     backgroundColor: "white",
     font: "inherit",
@@ -59,8 +69,14 @@ const app = (props) => {
   if (personsState.showPersons) {
     persons = (
       <div>
-        {personsState.persons.map((person) => {
-          return <Person name={person.name} age={person.age} />;
+        {personsState.persons.map((person, index) => {
+          return (
+            <Person
+              click={() => deletePersonHandler(index)}
+              name={person.name}
+              age={person.age}
+            />
+          );
         })}
       </div>
     );
