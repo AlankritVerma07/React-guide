@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import Radium, { StyleRoot } from "radium"; //we need StyleRoot for @mediaquries
+//import Radium, { StyleRoot } from "radium"; //we need StyleRoot for @mediaquries
 import Person from "./Person/Person";
 
 class App extends Component {
@@ -87,22 +87,20 @@ class App extends Component {
     if (this.state.persons.length <= 2) classes.push("red"); //classes=["red"]
     if (this.state.persons.length <= 1) classes.push("bold"); //classes=["red","bold"]
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>Hi, I'm a React App</h1>
-          <p className={classes.join(" ")}>This is really working!</p>
-          <button style={style} onClick={this.togglePersonsHandler}>
-            Toggle Persons
-          </button>
-          {persons}
-        </div>
-      </StyleRoot>
+      <div className="App">
+        <h1>Hi, I'm a React App</h1>
+        <p className={classes.join(" ")}>This is really working!</p>
+        <button style={style} onClick={this.togglePersonsHandler}>
+          Toggle Persons
+        </button>
+        {persons}
+      </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
 
-export default Radium(App);
+export default App;
 
 //-----------------------------------Assignment Sol.----------------------------------
 
