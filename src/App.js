@@ -74,8 +74,7 @@ class App extends Component {
       },
     }; */
 
-    let btnClass = [classes.Button];
-    console.log(btnClass);
+    let btnClass = "";
 
     let persons = null;
 
@@ -100,7 +99,7 @@ class App extends Component {
       //   backgroundColor: "salmon",
       //   color: "black",
       // };
-      btnClass.push(classes.Red);
+      btnClass = classes.Red;
     }
     const assignedClasses = [];
     if (this.state.persons.length <= 2) assignedClasses.push(classes.red); //assignedClasses=["red"]
@@ -112,7 +111,7 @@ class App extends Component {
         {/*<StyledButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>
           Toggle Persons
     </StyledButton>----> Using styled-components*/}
-        <button className={btnClass.join(" ")} onClick={this.togglePersonsHandler}>
+        <button className={btnClass} onClick={this.togglePersonsHandler}>
           Toggle Persons
         </button>
         {/* <button style={style} onClick={this.togglePersonsHandler}>
