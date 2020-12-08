@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import "./App.css";
+import classes from "./App.css";
 //import Radium, { StyleRoot } from "radium"; //we need StyleRoot for @mediaquries
-import styled from "styled-components";
+//import styled from "styled-components";
 import Person from "./Person/Person";
 
-const StyledButton = styled.button`
+/* const StyledButton = styled.button`
   background-color: ${(props) => (props.alt ? "red" : "green")};
   color: white;
   font: inherit;
@@ -16,7 +16,7 @@ const StyledButton = styled.button`
     background-color: ${(props) => (props.alt ? "salmon" : "lightgreen")};
     color: black;
   }
-`;
+`; */
 
 class App extends Component {
   state = {
@@ -61,7 +61,7 @@ class App extends Component {
   };
 
   render() {
-    const style = {
+    /* const style = {
       backgroundColor: "green",
       color: "white",
       font: "inherit",
@@ -72,7 +72,10 @@ class App extends Component {
         backgroundColor: "lightgreen",
         color: "black",
       },
-    };
+    }; */
+
+    let btnClass = [classes.Button];
+    console.log(btnClass);
 
     let persons = null;
 
@@ -97,17 +100,21 @@ class App extends Component {
       //   backgroundColor: "salmon",
       //   color: "black",
       // };
+      btnClass.push(classes.Red);
     }
-    const classes = [];
-    if (this.state.persons.length <= 2) classes.push("red"); //classes=["red"]
-    if (this.state.persons.length <= 1) classes.push("bold"); //classes=["red","bold"]
+    const assignedClasses = [];
+    if (this.state.persons.length <= 2) assignedClasses.push(classes.red); //assignedClasses=["red"]
+    if (this.state.persons.length <= 1) assignedClasses.push(classes.bold); //assignedClasses=["red","bold"]
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi, I'm a React App</h1>
-        <p className={classes.join(" ")}>This is really working!</p>
-        <StyledButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>
+        <p className={assignedClasses.join(" ")}>This is really working!</p>
+        {/*<StyledButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>
           Toggle Persons
-        </StyledButton>
+    </StyledButton>----> Using styled-components*/}
+        <button className={btnClass.join(" ")} onClick={this.togglePersonsHandler}>
+          Toggle Persons
+        </button>
         {/* <button style={style} onClick={this.togglePersonsHandler}>
           Toggle Persons
         </button> -----> Using inline-style and Radium */}
