@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import classes from "./App.css";
 //import Radium, { StyleRoot } from "radium"; //we need StyleRoot for @mediaquries
 //import styled from "styled-components";
-import Person from "./Person/Person";
-import ErrorBoundary from "./ErrorBounary/ErrorBoundary";
+import Person from "../components/Persons/Persons";
+import Cockpit from "../components/Cockpit/Cockpit";
+//import ErrorBoundary from "../ErrorBounary/ErrorBoundary";
 
 /* const StyledButton = styled.button`
   background-color: ${(props) => (props.alt ? "red" : "green")};
@@ -75,14 +76,20 @@ class App extends Component {
       },
     }; */
 
-    let btnClass = "";
+    //let btnClass = "" ---> Another Component;
 
     let persons = null;
 
     if (this.state.showPersons) {
       persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
+        <Person
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangedHandler}
+        />
+      );
+      {
+        /*{this.state.persons.map((person, index) => {
             return (
               <ErrorBoundary key={person.id}>
                 <Person
@@ -93,29 +100,39 @@ class App extends Component {
                 />
               </ErrorBoundary>
             );
-          })}
-        </div>
-      );
+          })} ------> Refactored into another component */
+      }
+
       // style.backgroundColor = "red";
       // style[":hover"] = {
       //   backgroundColor: "salmon",
       //   color: "black",
       // };
-      btnClass = classes.Red;
+
+      //btnClass = classes.Red  ---> Another Component;
     }
-    const assignedClasses = [];
-    if (this.state.persons.length <= 2) assignedClasses.push(classes.red); //assignedClasses=["red"]
-    if (this.state.persons.length <= 1) assignedClasses.push(classes.bold); //assignedClasses=["red","bold"]
+
+    //---------------------> Moved to another component----------------------------------
+    // const assignedClasses = [];
+    // if (this.state.persons.length <= 2) assignedClasses.push(classes.red); //assignedClasses=["red"]
+    // if (this.state.persons.length <= 1) assignedClasses.push(classes.bold); //assignedClasses=["red","bold"]
+    //---------------------> Moved to another component----------------------------------
+
     return (
       <div className={classes.App}>
-        <h1>Hi, I'm a React App</h1>
-        <p className={assignedClasses.join(" ")}>This is really working!</p>
+        <Cockpit
+          persons={this.state.persons}
+          showPersons={this.state.showPersons}
+          clicked={this.togglePersonsHandler}
+        />
+        {/*<h1>Hi, I'm a React App</h1>
+    <p className={assignedClasses.join(" ")}>This is really working!</p>---> Moved to another component*/}
         {/*<StyledButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>
           Toggle Persons
     </StyledButton>----> Using styled-components*/}
-        <button className={btnClass} onClick={this.togglePersonsHandler}>
+        {/*<button className={btnClass} onClick={this.togglePersonsHandler}>
           Toggle Persons
-        </button>
+        </button>---> move dto another component*/}
         {/* <button style={style} onClick={this.togglePersonsHandler}>
           Toggle Persons
         </button> -----> Using inline-style and Radium */}
